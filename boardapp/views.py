@@ -18,7 +18,6 @@ def signupfunc(request):
       return render(request, 'signup.html', {'error': 'このユーザーはすでに存在しています'})    
   return render(request, 'signup.html')
 
-
 def loginfunc(request):
   if request.method == "POST":
     username = request.POST['username']
@@ -31,7 +30,6 @@ def loginfunc(request):
       return render(request, 'login.html', {})
   return render(request, 'login.html', {})
 
-
 def listfunc(request):
   object_list = BoardModel.objects.all()
   return render(request, 'list.html', {'object_list': object_list})
@@ -41,5 +39,13 @@ def logoutfunc(request):
   return redirect('login')
 
 def detailfunc(request, pk):
+  # objectのデータを持ってくる方法は 'get_object_or_404' や 'BoardModel.obejects.get'などがある
   object = get_object_or_404(BoardModel, pk=pk)
   return render(request, 'detail.html', {'object': object})
+
+def goodfunc(request, pk):
+  # objectのデータを持ってくる方法は 'get_object_or_404' や 'BoardModel.obejects.get'などがある
+  object = BoardModel.objects.get(pk=pk)
+  object.good = object.good + 1
+  object.save()
+  return redirect('list')
