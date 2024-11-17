@@ -21,6 +21,7 @@ class Migration(migrations.Migration):
                 ('snsimage', models.ImageField(upload_to='')),
                 ('good', models.IntegerField()),
                 ('read', models.IntegerField()),
+                # readした人の情報を入れておく
                 ('readtext', models.TextField()),
             ],
         ),
