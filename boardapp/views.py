@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import authenticate, login, logout
@@ -39,3 +39,7 @@ def listfunc(request):
 def logoutfunc(request):
   logout(request)
   return redirect('login')
+
+def detailfunc(request, pk):
+  object = get_object_or_404(BoardModel, pk=pk)
+  return render(request, 'detail.html', {'object': object})
